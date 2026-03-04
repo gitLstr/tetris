@@ -162,6 +162,7 @@ export default function Tetris({ setScene , score, setScore}) {
     displayBoard = drawPiece(displayBoard, piece);
 
     return (
+        <div className="container">
         <div className="tetris-container">
             <div className="sidebar-left"> 
                 <DisplayScore score={score}/>
@@ -174,24 +175,28 @@ export default function Tetris({ setScene , score, setScore}) {
                 <div
                     key={idx}
                     className={`cell ${
-                        cell
-                        ? cell.includes("_ghost")
-                            ? "ghost"
-                            : "filled"
-                        : ""
+                    cell ? (cell.includes("_ghost") ? "ghost" : "filled") : ""
                     }`}
-                    style={
-                        cell
-                        ? { "--base": COLORS[cell.replace("_ghost", "")] }
-                        : undefined
-                    }
-                    />
+                    style={cell ? { "--base": COLORS[cell.replace("_ghost", "")] } : undefined}
+                />
                 ))}
             </div>
-
             <div className="sidebar">
                 <DisplayNextPiece queue={pieceQueue}/>
             </div>
+        </div>
+        <div className="board-buttons">
+                    <div className="board-buttons-top">
+                        <button onClick={() => movePiece(-1, 0)}>←</button>
+                        <button onClick={() => rotatePiece()}>↑</button>
+                    </div>
+
+                    <div className="board-buttons-bottom">
+                        <button onClick={() => movePiece(0, 1)}>↓</button>
+                        <button onClick={() => hardDrop()}>D</button>
+                        <button onClick={() => movePiece(1, 0)}>→</button>
+                    </div>
+                </div>
         </div>
     );
 }

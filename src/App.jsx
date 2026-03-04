@@ -18,7 +18,7 @@ export default function App() {
 
   return (
     <>
-    <div>
+    <div className='app-container'>
       {scene === "home" && <Home setScene={setScene} text={text} />}
       {scene === "tetris" && (
         <Tetris setScene={setScene} setText={setText} score={score} setScore={setScore} />

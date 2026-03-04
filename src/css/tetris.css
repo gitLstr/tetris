@@ -1,52 +1,98 @@
+.container {
+  gap: 40px;
+  width: 100dvw;
+  padding: 20px;
+  background-color: #111;
+  box-sizing: border-box;
+}
+
 .tetris-container {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  height: 90vh;
-  background-color: #111;
-  color: #fff;
-  padding: 15px; /* global padding */
-  box-sizing: border-box; 
-}
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
 
+  background-color: #111;
+  box-sizing: border-box;
+}
 
 .board {
   display: grid;
-  grid-template-columns: repeat(10, 30px);
-  grid-template-rows: repeat(20, 30px);
-  background-color: #111111;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+  aspect-ratio: 10 / 20; /* keeps blocks square */
+  background-color: #111;
   border: 2px solid #555;
-  margin-right: 20px;
+  height: 85vw;
+  max-height: 600px;
 }
+
+/* Button clusters */
+.board-buttons {
+  display: block;
+  width: 60dvw;
+  max-width: 400px;
+  justify-self: center;
+}
+
+.board-buttons-top {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.board-buttons-bottom {
+  display: flex;
+  justify-content: flex-end; /* push everything to the right */
+}
+
+.board-buttons-bottom button:first-child {
+  margin-right: auto; /* pushes ↓ to the far left */
+}
+
+
+.board-buttons button {
+  width: 70px;
+  height: 60px;
+  font-size: 2dvh;
+  background-color: #222;
+  color: #eee;
+  border: 2px solid #555;
+}
+
+.board-buttons button:hover {
+  background-color: #333;
+}
+
 
 .sidebar {
   display: flex;
   flex-direction: column;
   justify-content: flex-start; 
-  height: 600px;
+  height: auto;
+  width: auto;
   position: relative;
+  margin-left: 20px;
 }
 
 .sidebar-left {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; 
-  height: 600px;
-  position: relative;
-  margin-right: 40px;
+  justify-content: space-between; /* pushes content to top and bottom */
+  height: 10vh;
 }
 
-
 .back-button {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  margin-top: auto; /* ensures it sticks to the bottom */
 }
 
 .cell {
-  width: 30px;
-  height: 30px;
-  box-shadow: inset 0 0 0 .5px #313131;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0 0 0 .1vmin #313131; /* optional for proportional shadow */
 }
 
 .cell.filled {
@@ -94,25 +140,43 @@
 .next-pieces {
   display: flex;
   flex-direction: column;
-  gap: 12px;
   align-items: center;
 }
 
 .next-box {
-  width: 75px;   /* 5 × 15px */
-  height: 75px;
+  width: 8dvh;   /* 5 × 15px */
+  height: 6.4dvh;
   border: 2px solid #555;
   display: grid;
-  grid-template-columns: repeat(5, 15px);
-  grid-template-rows: repeat(5, 15px);
+  grid-template-columns: repeat(5, 1.6dvh);
+  grid-template-rows: repeat(5, 1.6dvh);
   margin-bottom: 12px;
   justify-content: center;
   align-items: center;
 }
 
-.next-box .cell {
-  width: 15px;
-  height: 15px;
-  box-shadow: inset 0 0 0 .5px #313131;
+.next-cell {
+  width: 1.6dvh;
+  height: 1.6dvh;
+}
+
+.next-cell.filled {
+  --base: #ffffff;
+  --light: color-mix(in srgb, var(--base), white 40%);
+  --dark: color-mix(in srgb, var(--base), black 40%);
+
+  background: linear-gradient(
+    to bottom,
+    var(--light) 15%,
+    var(--base) 40%,
+    var(--dark) 80%
+  );
+
+  border: .5px solid #111;
+
+  box-shadow:
+    inset 0 0 0 2px var(--light),
+    inset -2px -2px 4px rgba(33, 33, 33, 0.6),
+    inset 2px 2px 4px var(--dark);
 }
 
