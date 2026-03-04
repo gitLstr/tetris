@@ -7,7 +7,7 @@ export default function DisplayNextPiece({ queue }) {
   return (
     <div className="next-pieces">
       {queue.map((piece, idx) => {
-        const previewBoard = createBoard(5, 5);
+        const previewBoard = createBoard(5, 4);
         const centeredPiece = { ...piece, x: 1, y: 1 };
         const boardWithPiece = drawPiece(previewBoard, centeredPiece);
 
@@ -16,7 +16,7 @@ export default function DisplayNextPiece({ queue }) {
             {boardWithPiece.flat().map((cell, i) => (
               <div
                 key={i}
-                className={`cell ${cell ? "filled" : ""}`}
+                className={`next-cell ${cell ? "filled" : ""}`}
                 style={cell ? { "--base": COLORS[cell] } : undefined}
               />
             ))}
