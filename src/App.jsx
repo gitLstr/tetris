@@ -10,7 +10,9 @@ export default function App() {
   const [score, setScore] = useState(0)
   useEffect(() => {
     if (scene === "home") setText("Home")
-    if (scene === "tetris") setText("Playing a game")
+    if (scene === "tetris") {
+      setScore(0);
+    }
     if (scene === "gameover") setText("Game Over")
   }, [scene])
 
